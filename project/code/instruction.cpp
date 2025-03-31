@@ -2,32 +2,43 @@
 
 using namespace std;
 
-unordered_map<string, vector<string>> ins_map = {
+const vector<string> r_arith = {"000000", "regi", "regi", "regi"};
+const vector<string> r_shift = {"000000", "regi", "regi", "const_5"};
+const vector<string> r_ja = {"000000", "regi", "00000", "00000"};
+
+const vector<string> i_arith = {"opcode", "regi", "regi", "const_16"};
+const vector<string> i_label = {"opcode", "regi", "regi", "label"};
+const vector<string> i_memory = {"opcode", "regi", "offset_regi"};
+const vector<string> i_lui = {"opcode", "regi", "000000", "label"};
+
+const vector<string> j = {"opcode", "target"};
+
+const unordered_map<string, vector<string>> ins_map = {
     // R-type  funct
-    {"add",   {"R", "100000"}},
-    {"sub",   {"R", "100010"}},
-    {"and",   {"R", "100100"}},
-    {"or",    {"R", "100101"}},
-    {"xor",   {"R", "100110"}},
-    {"nor",   {"R", "100111"}},
-    {"slt",   {"R", "101010"}},
-    {"sll",   {"R", "000000"}},
-    {"srl",   {"R", "000010"}},
-    {"jr",    {"R", "001000"}},
+    {"add",   r_arith},
+    {"sub",   r_arith},
+    {"and",   r_arith},
+    {"or",    r_arith},
+    {"xor",   r_arith},
+    {"nor",   r_arith},
+    {"slt",   r_shift},
+    {"sll",   r_shift},
+    {"srl",   r_shift},
+    {"jr",    r_ja},
     // I-type  opcode
-    {"addi",  {"I", "001000"}},
-    {"andi",  {"I", "001100"}},
-    {"ori",   {"I", "001101"}},
-    {"xori",  {"I", "001110"}},
-    {"lw",    {"I", "100011"}},
-    {"sw",    {"I", "101011"}},
-    {"lui",   {"I", "001111"}},
-    {"slti",  {"I", "001010"}},
-    {"beq",   {"I", "000100"}},
-    {"bne",   {"I", "000101"}},
+    {"addi",  i_arith},
+    {"andi",  i_arith},
+    {"ori",   i_arith},
+    {"xori",  i_arith},
+    {"lw",    i_memory},
+    {"sw",    i_memory},
+    {"lui",   i_lui},
+    {"slti",  i_arith},
+    {"beq",   i_label},
+    {"bne",   i_label},
     // J-type  opcode
-    {"j",     {"J", "000010"}},
-    {"jal",   {"J", "000011"}}
+    {"j",     j},
+    {"jal",   j}
 };
 
 string str_to_5bit(const string& s)
