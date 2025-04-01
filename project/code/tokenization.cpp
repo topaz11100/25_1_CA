@@ -5,24 +5,27 @@ vector<string> line_parsing(string s)
     vector<string> result;
     stringstream ss{s};
     string temp_str; char temp_char;
-    while(ss.get(temp_char))
+    while(ss >> temp_str)
     {
-        switch (temp_char)
+        if (temp_str[temp_str.size() - 1] == ',')
         {
-        case ' ':
-            result.push_back(temp_str);
-            temp_str.clear();
-            break;
-        case ',':
-            continue;
-        case '#':
-            temp_str.clear();
+            result.push_back(temp_str.substr(0, temp_str.size() - 1));
+        }
+        else if(temp_str[0] == '#')
+        {
             return result;
-        default:
-            temp_str += temp_char;
+        }
+        else if(temp_str[temp_str.size() - 1] == ')')
+        {
+            int split = temp_str.find('('), l = temp_str.size();
+            result.push_back(temp_str.substr(0, split));
+            result.push_back(temp_str.substr(split + 1, l - split - 2));
+        }
+        else
+        {
+            result.push_back(temp_str);
         }
     }
-    if (!temp_str.empty()) result.push_back(temp_str);
     return result;
 }
 

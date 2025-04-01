@@ -29,20 +29,14 @@ int main()
 {
     vector<vector<string>> file = asm_to_vector("token_test.asm");
     print(file);
+    cout << endl;
+    
     for(const vector<string>& v: file)
     {
         printsingle(v);
-        string s = parse(v);
+        string s = ins_encode(v);
         cout << s << endl;
     }
+        
     return 0;
 }
-
-/*
-
-00100001000000000000000000000101
-00100000000010000000000000000101
-
-00100001001000000000000000001010
-
-*/
