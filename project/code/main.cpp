@@ -10,18 +10,39 @@ void print(vector<vector<string>> v)
     {
         for (const string& s:a)
         {
-            cout << s << " ";
+            cout << s << ";";
         }
         cout << endl;
     }
 }
 
+void printsingle(vector<string> v)
+{
+    for(const string& c : v)
+    {
+        cout << c << " ";
+    }
+    cout << endl;
+}
+
 int main()
 {
-    vector<vector<string>> parsed = asm_to_vector("token_test.asm");
-    print(parsed);
-
-    cout << ins_map[parsed[0][0]][0] << ' ' << ins_map[parsed[0][0]][1];
-
+    vector<vector<string>> file = asm_to_vector("token_test.asm");
+    print(file);
+    for(const vector<string>& v: file)
+    {
+        printsingle(v);
+        string s = parse(v);
+        cout << s << endl;
+    }
     return 0;
 }
+
+/*
+
+00100001000000000000000000000101
+00100000000010000000000000000101
+
+00100001001000000000000000001010
+
+*/
