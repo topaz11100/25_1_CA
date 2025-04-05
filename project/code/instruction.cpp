@@ -88,6 +88,12 @@ const unordered_map< string, pair< string, vector<pair<ins_func_type, int>> > > 
     {"jal", {"000011", j}}
 };
 
+string target(const string& arg)
+{
+    bitset<22> bin{ static_cast<long long unsigned int>(stoi(arg)) };
+    return bin.to_string();
+}
+
 string opcode(const string &arg)
 {
     return ins_table.at(arg).first;

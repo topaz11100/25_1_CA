@@ -1,4 +1,5 @@
 #include "base_include.h"
+#include "label.h"
 #include "tokenization.h"
 #include "instruction.h"
 #include "register.h"
