@@ -1,4 +1,32 @@
-#include "register.h"
+#include "const_table.h"
+
+const unordered_map<string, string> opcode_table = {
+    // R-type
+    {"add",  "100000"},
+    {"sub",  "100010"},
+    {"and",  "100100"},
+    {"or",   "100101"},
+    {"xor",  "100110"},
+    {"nor",  "100111"},
+    {"slt",  "101010"},
+    {"sll",  "000000"},
+    {"srl",  "000010"},
+    {"jr",   "001000"},
+    // I-type
+    {"addi", "001000"},
+    {"andi", "001100"},
+    {"ori",  "001101"},
+    {"xori", "001110"},
+    {"lw",   "100011"},
+    {"sw",   "101011"},
+    {"lui",  "001111"},
+    {"slti", "001010"},
+    {"beq",  "000100"},
+    {"bne",  "000101"},
+    // J-type
+    {"j",    "000010"},
+    {"jal",  "000011"}
+};
 
 const unordered_map<string, string> regi_table = {
     {"$zero", "00000"},

@@ -7,6 +7,6 @@
 #include <sstream>
 #include <algorithm>
 #include <unordered_map>
-#include <bitset> 
+#include <bitset>
 
 using namespace std;

@@ -6,8 +6,11 @@
             "command": "D:\\mingw64\\bin\\g++.exe",
             "args": [
                 "-fdiagnostics-color=always",
+                "-Iheader",
                 "-g",
-                "${fileDirname}\\*.cpp",
+                "${fileDirname}\\main.cpp",
+                "-g",
+                "${fileDirname}\\cpp\\*.cpp",
                 "-o",
                 "${fileDirname}\\${fileBasenameNoExtension}.exe"
             ],

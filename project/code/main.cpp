@@ -2,9 +2,8 @@
 #include "label.h"
 #include "tokenization.h"
 #include "instruction.h"
-#include "register.h"
 
-void print(vector<vector<string>> v)
+void print(const vector<vector<string>>& v)
 {
     cout << endl;
     for (const vector<string>& a:v)
@@ -17,7 +16,7 @@ void print(vector<vector<string>> v)
     }
 }
 
-void printsingle(vector<string> v)
+void printsingle(const vector<string>& v)
 {
     for(const string& c : v)
     {
@@ -26,18 +25,29 @@ void printsingle(vector<string> v)
     cout << endl;
 }
 
+void print_label(const unordered_map<string, int>& l)
+{
+    for (auto& x : l)
+    {
+        cout << x.first << " " << x.second << endl;
+    }
+}
+
 int main()
 {
-    vector<vector<string>> file = asm_to_vector("token_test.asm");
+    string file_path = "resource/token_test.asm";
+    vector<vector<string>> file = asm_to_vector(file_path);
     print(file);
-    cout << endl;
-    
-    for(const vector<string>& v: file)
+    print_label(label_table);
+
+    /*
+    for (const vector<string>& v : file)
     {
         printsingle(v);
         string s = ins_encode(v);
         cout << s << endl;
     }
-        
+    */
+
     return 0;
 }

@@ -1,5 +1,3 @@
-#pragma once
-
-#include "base_include.h"
+#include "label.h"
 
 unordered_map<string, int> label_table;
