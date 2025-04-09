@@ -40,14 +40,14 @@ int main()
     print(file);
     print_label(label_table);
 
-    /*
+    
     for (const vector<string>& v : file)
     {
         printsingle(v);
         string s = ins_encode(v);
         cout << s << endl;
     }
-    */
+    
 
     return 0;
 }
