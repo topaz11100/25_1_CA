@@ -14,7 +14,7 @@ vector<vector<string>> asm_to_vector(const string& path)
         {
             if (token[token.size() - 1] == ':')
             {
-                label_table.insert({ token, result.size() });
+                label_table.insert({ token.substr(0, token.size() - 1), result.size() });
             }
             else if (token[token.size() - 1] == ',')
             {

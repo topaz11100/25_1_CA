@@ -13,21 +13,23 @@ string regi(const string& arg)
 }
 string const_5(const string& arg)
 {
-    bitset<5> bin{ static_cast<long long unsigned int>(stoi(arg)) };
+    bitset<5> bin( stoi(arg) );
     return bin.to_string();
 }
 string const_16(const string& arg)
 {
-    bitset<16> bin{ static_cast<long long unsigned int>(stoi(arg)) };
+    bitset<16> bin( stoi(arg) );
     return bin.to_string();
 }
 string label(const string& arg)
 {
-    return "";
+    int offset = label_table.at(arg) - pc;
+    return const_16(to_string(offset));
 }
 string target(const string& arg)
 {
-    return "";
+    bitset<26> bin( 4 * label_table.at(arg) );
+    return bin.to_string();
 }
 string zero_5(const string& arg)
 {
@@ -98,7 +100,7 @@ const unordered_map<string, exec_seq_T> exec_table = {
     {"or",  r_arith},
     {"xor", r_arith},
     {"nor", r_arith},
-    {"slt", r_shift},
+    {"slt", r_arith},
     {"sll", r_shift},
     {"srl", r_shift},
     {"jr",  r_ja},
