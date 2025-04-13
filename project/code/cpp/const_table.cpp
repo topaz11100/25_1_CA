@@ -1,5 +1,6 @@
 #include "const_table.h"
 
+//opcode정의 R타입은 opcode가 모두 0이므로 funct코드를 저장장
 const unordered_map<string, string> opcode_table = {
     // R-type
     {"add",  "100000"},
@@ -28,6 +29,7 @@ const unordered_map<string, string> opcode_table = {
     {"jal",  "000011"}
 };
 
+//레지스터 번호 저장
 const unordered_map<string, string> regi_table = {
     {"$zero", "00000"},
     {"$at",   "00001"},

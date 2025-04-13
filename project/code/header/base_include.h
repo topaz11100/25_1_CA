@@ -11,6 +11,8 @@
 
 using namespace std;
 
+//출력용 함수들
+
 template<class T>
 void print(T& v)
 {
@@ -18,7 +20,6 @@ void print(T& v)
     {
         cout << c << " ";
     }
-    cout << endl;
 }
 
 template<class T>
@@ -27,6 +28,7 @@ void print_doubled(T& v)
     for (auto& a : v)
     {
         print(a);
+        cout << endl;
     }
 }
 
