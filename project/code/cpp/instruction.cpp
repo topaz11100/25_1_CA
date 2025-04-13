@@ -23,12 +23,12 @@ string const_16(const string& arg)
 }
 string label(const string& arg)
 {
-    int offset = label_table.at(arg) - pc;
+    int offset = label_table.at(arg) - (pc - 1);
     return const_16(to_string(offset));
 }
 string target(const string& arg)
 {
-    bitset<26> bin( 4 * label_table.at(arg) );
+    bitset<26> bin( label_table.at(arg) );
     return bin.to_string();
 }
 string zero_5(const string& arg)
