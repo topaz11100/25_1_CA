@@ -18,7 +18,7 @@ debug     = 콘솔로 자세한 정보 출력할지 결정, 보고싶으면 true
 */
 
 string file_path = "resource/token_test.asm";
-string out_path  = "resource/bin_test.bin";
+string out_path  = "resource/token_test.bin";
 bool debug = true;
 
 //모드 실행
@@ -47,7 +47,7 @@ void execute_1(const vector<vector<string>>& ins, ofstream& bin)
         cout << i << endl;
         bin << i << endl;
     }
-    cout << "encode complete .bin created " << out_path << endl;
+    cout << endl << "encode complete .bin created " << out_path << endl << endl;
 }
 
 //메인 실행

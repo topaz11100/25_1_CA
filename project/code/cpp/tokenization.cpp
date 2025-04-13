@@ -42,13 +42,13 @@ vector<vector<string>> asm_to_vector(const string& path)
                 temp.push_back(token.substr(0, split));
                 temp.push_back(token.substr(split + 1, l - split - 2));
             }
-            //add같은 일반 토큰은 그냥 저장장
+            //add같은 일반 토큰은 그냥 저장
             else
             {
                 temp.push_back(token);
             }
         }
-        // 4 같은 즉시값 있으면 저장장
+        // 4 같은 즉시값 있으면 저장
         if (!temp.empty()) result.push_back(temp);
     }
     return result;
