@@ -1,53 +1,30 @@
-swap:
-    sll  $t1, $a1, 2       # $t1 = k * 4
-    add  $t1, $a0, $t1     # $t1 = v + (k * 4) = address of v[k]
-    lw   $t0, 0($t1)       # $t0 (temp) = v[k]
-    lw   $t2, 4($t1)       # $t2 = v[k+1]
-    sw   $t2, 0($t1)       # v[k] = $t2 (v[k+1])
-    sw   $t0, 4($t1)       # v[k+1] = $t0 (temp)
-    jr   $ra               # return to calling routine
+main:
+    addi $t0, $zero, 10     # $t0 = 10 (i형, 양수 즉시값)
+    addi $t1, $zero, -5     # $t1 = -5 (i형, 음수 즉시값)
+    add  $t2, $t0, $t1      # $t2 = $t0 + $t1 (r형, 산술)
+    
+    sll  $t3, $t2, 1        # $t3 = $t2 * 2 (r형, 시프트)
+    srl  $t4, $t3, 2        # $t4 = $t3 / 4 (산술 시프트)
 
-sort:
-    addi $sp, $sp, -20     # make room on stack for 5 registers
-    sw   $ra, 16($sp)      # save $ra on stack
-    sw   $s3, 12($sp)      # save $s3 on stack
-    sw   $s2, 8($sp)       # save $s2 on stack
-    sw   $s1, 4($sp)       # save $s1 on stack
-    sw   $s0, 0($sp)       # save $s0 on stack
+    sw   $t4, 0($sp)        # 메모리 저장 (메모리 접근)
+    lw   $t5, 0($sp)        # 메모리 로드
 
-    add  $s2, $a0, $zero   # save $a0 into $s2
-    add  $s3, $a1, $zero   # save $a1 into $s3
-    add  $s0, $zero, $zero # i = 0
+    slt  $t6, $zero, $t5    # $t6 = ($zero < $t5)? 1 : 0 (음수 판별)
+    beq  $t6, $zero, is_ne  # if $t5 <= 0 jump to is_negative
+    j    is_po              # 양수이면 is_positive로 jump
 
-for1tst:
-    slt  $t0, $s0, $s3     # $t0 = 0 if $s0 >= $s3 (i ≥ n)
-    beq  $t0, $zero, exit1 # go to exit1 if $s0 >= $s3 (i ≥ n)
-    addi $s1, $s0, -1      # j = i - 1
+is_ne:
+    addi $a0, $zero, 1      # $a0 = 1 (음수 분기 확인용)
+    jal  print              # 함수 호출
+    j    end                # 종료
 
-for2tst:
-    slti $t0, $s1, 0       # $t0 = 1 if $s1 < 0 (j < 0)
-    bne  $t0, $zero, exit2 # go to exit2 if $s1 < 0 (j < 0)
-    sll  $t1, $s1, 2       # $t1 = j * 4
-    add  $t2, $s2, $t1     # $t2 = v + (j * 4)
-    lw   $t3, 0($t2)       # $t3 = v[j]
-    lw   $t4, 4($t2)       # $t4 = v[j + 1]
-    slt  $t0, $t4, $t3     # $t0 = 1 if $t4 < $t3
-    beq  $t0, $zero, exit2 # go to exit2 if $t4 >= $t3
-    add  $a0, $s2, $zero   # 1st param of swap is v (old $a0)
-    add  $a1, $s1, $zero   # 2nd param of swap is j
-    jal  swap              # call swap procedure
-    addi $s1, $s1, -1      # j -= 1
-    j    for2tst           # jump to test of inner loop
+is_po:
+    addi $a0, $zero, 2      # $a0 = 2 (양수 분기 확인용)
+    jal  print       # 함수 호출
 
-exit2:
-    addi $s0, $s0, 1       # i += 1
-    j    for1tst           # jump to test of outer loop
+print:
+    add  $v0, $a0, $zero    # 반환값 세팅
+    jr   $ra                # 복귀
 
-exit1:
-    lw   $s0, 0($sp)       # restore $s0 from stack
-    lw   $s1, 4($sp)       # restore $s1 from stack
-    lw   $s2, 8($sp)       # restore $s2 from stack
-    lw   $s3, 12($sp)      # restore $s3 from stack
-    lw   $ra, 16($sp)      # restore $ra from stack
-    addi $sp, $sp, 20      # restore stack pointer
-    jr   $ra               # return to calling routine
+end:
+
