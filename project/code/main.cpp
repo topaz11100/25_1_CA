@@ -17,9 +17,9 @@ out_path  = .bin저장 경로
 debug     = 콘솔로 자세한 정보 출력할지 결정, 보고싶으면 true, .bin만 출력하려면 false
 */
 
-string file_path = "resource/token_test.asm";
-string out_path  = "resource/token_test.bin";
-bool debug = true;
+//string file_path = "resource/token_test.asm";
+//string out_path  = "resource/token_test.bin";
+bool debug = false;
 
 //모드 실행
 void execute_0(const vector<vector<string>>& ins, ofstream& bin)
@@ -47,16 +47,16 @@ void execute_1(const vector<vector<string>>& ins, ofstream& bin)
         cout << i << endl;
         bin << i << endl;
     }
-    cout << endl << "encode complete .bin created " << out_path << endl << endl;
+    //cout << endl << "encode complete .bin created " << out_path << endl << endl;
 }
 
 //메인 실행
-int main()
+int main(int argc, char* argv[])
 {
     //변수 설정
-    ofstream bin{ out_path };
+    ofstream bin(argv[2]);
     //파싱된 명령어 모음
-    vector<vector<string>> parsed_ins = asm_to_vector(file_path);
+    vector<vector<string>> parsed_ins = asm_to_vector(argv[1]);
     //상수에 따라 실행
     if (debug) execute_1(parsed_ins, bin);
     else       execute_0(parsed_ins, bin);
